@@ -35,26 +35,35 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {    
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-		
-		_leftLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-		[_leftLabel setBackgroundColor:[UIColor clearColor]];
-		[_leftLabel setTextColor:[UIColor colorWithRed:.285 green:.376 blue:.541 alpha:1]];
-		[_leftLabel setFont:[UIFont fontWithName:@"Helvetica" size:17]];
-		[_leftLabel setTextAlignment:UITextAlignmentRight];
-		[self addSubview:_leftLabel];
-		
-		_rightTextField = [[ELCInsetTextField alloc] initWithFrame:CGRectZero];
-		_rightTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-		[_rightTextField setDelegate:self];
-		[_rightTextField setFont:[UIFont systemFontOfSize:17]];
-		
-        //Use Done for all of them.
-		[_rightTextField setReturnKeyType:UIReturnKeyDone];
-		
-		[self addSubview:_rightTextField];
+		[self setupCell];
     }
 	
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [self setupCell];
+}
+
+- (void)setupCell
+{
+    _leftLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [_leftLabel setBackgroundColor:[UIColor clearColor]];
+    [_leftLabel setTextColor:[UIColor colorWithRed:.285 green:.376 blue:.541 alpha:1]];
+    [_leftLabel setFont:[UIFont fontWithName:@"Helvetica" size:17]];
+    [_leftLabel setTextAlignment:NSTextAlignmentRight];
+    [self addSubview:_leftLabel];
+    
+    _rightTextField = [[ELCInsetTextField alloc] initWithFrame:CGRectZero];
+    _rightTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    [_rightTextField setDelegate:self];
+    [_rightTextField setFont:[UIFont systemFontOfSize:17]];
+    
+    //Use Done for all of them.
+    [_rightTextField setReturnKeyType:UIReturnKeyDone];
+    
+    [self addSubview:_rightTextField];
 }
 
 //Layout our fields in case of a layoutchange (fix for iPad doing strange things with margins if width is > 400)
